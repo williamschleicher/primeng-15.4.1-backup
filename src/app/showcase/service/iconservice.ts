@@ -14,7 +14,8 @@ export class IconService {
     apiUrl = 'assets/showcase/data/icons.json';
 
     getBaseUrl() {
-        return `${this.document.location.protocol}//${this.document.location.host}/`;
+        const baseElement = this.document.getElementsByTagName('base')[0];
+        return baseElement ? baseElement.href : `${this.document.location.protocol}//${this.document.location.host}/`;
     }
 
     getIcons() {
