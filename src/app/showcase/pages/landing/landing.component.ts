@@ -9,6 +9,7 @@ import { AppComponent } from '../../layout/app.component';
 import { AppConfigService } from '../../service/appconfigservice';
 import { CustomerService } from '../../service/customerservice';
 import { NodeService } from '../../service/nodeservice';
+import docsearch from '@docsearch/js';
 interface City {
     name: string;
     code: string;
@@ -246,6 +247,33 @@ export class LandingComponent implements OnInit, OnDestroy {
     ngAfterViewInit() {
         this.setAnimation = true;
         this.cd.detectChanges();
+        this.initDocSearch();
+    }
+
+    initDocSearch() {
+        docsearch({
+            appId: 'XG1L2MUWT9',
+            apiKey: '6057fe1af77fee4e7e41907b0b3ec79d',
+            indexName: 'primeng',
+            container: '#docsearch',
+            transformItems: this.handleDocSearchTransformItems.bind(this)
+        });
+    }
+
+    handleDocSearchTransformItems(results) {
+        return results.map((result) => {
+            let url = new URL(result.url);
+
+            const path = url.pathname.split('/')[1];
+            const hash = url.hash;
+            const base = this.document.getElementsByTagName('base')[0].href.toString();
+
+            url = new URL(base + path + hash);
+
+            result.url = url.toString();
+
+            return result;
+        });
     }
 
     ngOnDestroy() {
