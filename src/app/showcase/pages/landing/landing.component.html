@@ -1,15 +1,11 @@
 <div class="landing {{ config.dark ? 'landing-dark' : 'landing-light' }}"
     [ngClass]="{ 'landing-news-active': app.newsActive }">
     <div class="landing-intro">
-        <app-news *ngIf="app.newsActive && app.announcement" (onNewsHide)="app.onNewsClose()"
-            [announcement]="app.announcement"></app-news>
         <section #containerElement class="landing-header px-5 lg:px-8"
             [ngClass]="{ 'landing-header-active': menuActive }">
             <div class="landing-header-container">
                 <span>
-                    <a href="/">
-                        <img ngSrc="https://primefaces.org/cdn/primeng/images/primeng-logo-{{ config.dark ? 'light' : 'dark' }}.svg" width="129" height="35" alt="PrimeNG" class="landing-header-logo" priority/>
-                    </a>
+                    <img ngSrc="https://primefaces.org/cdn/primeng/images/primeng-logo-{{ config.dark ? 'light' : 'dark' }}.svg" width="129" height="35" alt="PrimeNG" class="landing-header-logo" priority/>
                 </span>
 
                 <div class="flex align-items-center">

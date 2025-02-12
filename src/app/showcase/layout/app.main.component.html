@@ -1,4 +1,3 @@
-<app-news *ngIf="app.newsActive && app.announcement" (onNewsHide)="app.onNewsClose()" [announcement]="app.announcement"></app-news>
 <div class="layout-wrapper {{config.dark ? 'layout-wrapper-dark' : 'layout-wrapper-light'}}" [ngClass]="{'layout-news-active': app.newsActive}">
     <app-topbar (menuButtonClick)="onMenuButtonClick()"></app-topbar>
     <app-config></app-config>
