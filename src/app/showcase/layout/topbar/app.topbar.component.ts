@@ -70,16 +70,16 @@ export class AppTopBarComponent implements OnInit, OnDestroy {
     }
 
     handleDocSearchTransformItems(results) {
-        const valid = process.env.NODE_ENV !== 'production';
         return results.map((result) => {
-            if (valid) {
-                const url = new URL(result.url);
+                let url = new URL(result.url);
 
-                url.protocol = this.window.location.protocol;
-                url.hostname = this.window.location.hostname;
-                url.port = this.window.location.port;
+                const path = url.pathname.split('/')[1];
+                const hash = url.hash;
+                const base = this.document.getElementsByTagName('base')[0].href.toString();
+
+                url = new URL(base + path + hash);
+
                 result.url = url.toString();
-            }
 
             return result;
         });

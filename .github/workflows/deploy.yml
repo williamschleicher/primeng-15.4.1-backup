@@ -25,6 +25,9 @@ jobs:
         run: |
           ng build --configuration production --base-href "https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/" --deploy-url "/${{ github.event.repository.name }}/"
 
+      - name: Copy index.html to 404.html
+        run: cp dist/primeng/browser/index.html dist/primeng/browser/404.html
+
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@4.1.4
         with:
