@@ -1,6 +1,5 @@
-import { isPlatformBrowser } from '@angular/common';
+import { DOCUMENT, isPlatformBrowser } from '@angular/common';
 import { Component, ElementRef, Inject, Input, PLATFORM_ID } from '@angular/core';
-import { Router } from '@angular/router';
 import { DomHandler } from 'primeng/dom';
 import { Subscription } from 'rxjs';
 import { default as MenuData } from 'src/assets/showcase/data/menu.json';
@@ -28,7 +27,7 @@ export class AppMenuComponent {
 
     subscription!: Subscription;
 
-    constructor(@Inject(PLATFORM_ID) private platformId: any, private configService: AppConfigService, private el: ElementRef, private router: Router) {
+    constructor(@Inject(DOCUMENT) private document: Document, @Inject(PLATFORM_ID) private platformId: any, private configService: AppConfigService, private el: ElementRef,) {
         this.menu = MenuData.data;
         this.config = this.configService.config;
         this.subscription = this.configService.configUpdate$.subscribe((config) => (this.config = config));
@@ -47,6 +46,10 @@ export class AppMenuComponent {
         if (activeItem && !this.isInViewport(activeItem)) {
             activeItem.scrollIntoView({ block: 'center' });
         }
+    }
+
+    getHomeUrl(){
+        return this.document.getElementsByTagName('base')[0].href.toString();
     }
 
     isInViewport(element) {

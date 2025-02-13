@@ -266,7 +266,7 @@ export class LandingComponent implements OnInit, OnDestroy {
 
             const path = url.pathname.split('/')[1];
             const hash = url.hash;
-            const base = this.document.getElementsByTagName('base')[0].href.toString();
+            const base = this.getHomeUrl();
 
             url = new URL(base + path + hash);
 
@@ -274,6 +274,10 @@ export class LandingComponent implements OnInit, OnDestroy {
 
             return result;
         });
+    }
+
+    getHomeUrl(){
+        return this.document.getElementsByTagName('base')[0].href.toString();
     }
 
     ngOnDestroy() {
